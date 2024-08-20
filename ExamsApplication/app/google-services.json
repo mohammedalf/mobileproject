@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "379109685868",
+    "project_id": "exams-platform",
+    "storage_bucket": "exams-platform.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379109685868:android:527e08afff1a5b6a697649",
+        "android_client_info": {
+          "package_name": "be.ap.examsapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKekBL1PfR22KKMZCql-2Slbqc7uDYYp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
