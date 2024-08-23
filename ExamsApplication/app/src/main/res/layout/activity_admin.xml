@@ -35,11 +35,33 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"/>
 
+    <EditText
+        android:id="@+id/multipleUsersEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Paste users here (FirstName LastName per line)"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:gravity="top"
+        app:layout_constraintTop_toBottomOf="@+id/addUserButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/addMultipleUsersButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Multiple Users"
+        app:layout_constraintTop_toBottomOf="@+id/multipleUsersEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/addUserButton"
+        app:layout_constraintTop_toBottomOf="@+id/addMultipleUsersButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
