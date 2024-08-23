@@ -61,7 +61,8 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Login is successful, redirect to HomeActivity
-                    val intent = Intent(this, HomeActivity::class.java)
+//                    val intent = Intent(this, HomeActivity::class.java)
+                    val intent = Intent(this, AdminActivity::class.java)
                     startActivity(intent)
                     finish()  // Close the login activity
                 } else {
