@@ -2,40 +2,152 @@ package be.ap.examsapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val usersManagementButton: Button = findViewById(R.id.usersManagementButton)
-        val examsManagementButton: Button = findViewById(R.id.examsManagementButton)
-        val resultsButton: Button = findViewById(R.id.resultsButton)
-        val settingsButton: Button = findViewById(R.id.settingsButton)
+        auth = FirebaseAuth.getInstance()
 
-        // Navigatie naar Users Management
-        usersManagementButton.setOnClickListener {
-            val intent = Intent(this, AdminActivity::class.java)
-            startActivity(intent)
-        }
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)  // Set the toolbar as the ActionBar
 
-        // Voeg hier soortgelijke navigatie toe voor Exams Management, Results en Settings
-        examsManagementButton.setOnClickListener {
-            // TODO: Voeg intent toe naar Exams Management Activity
-        }
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
 
-        resultsButton.setOnClickListener {
-            // TODO: Voeg intent toe naar Results Activity
-        }
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
-        settingsButton.setOnClickListener {
-            // TODO: Voeg intent toe naar Settings Activity
+        navView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                // Handle settings click
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_users -> {
+                val intent = Intent(this, AdminActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_exams -> {
+                // TODO: Navigate to Exams Management Activity
+            }
+            R.id.nav_results -> {
+                // TODO: Navigate to Results Activity
+            }
+            R.id.nav_settings -> {
+                // TODO: Navigate to Settings Activity
+            }
+            R.id.nav_logout -> {
+                auth.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+/*    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        auth = FirebaseAuth.getInstance()
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_users -> {
+                // Navigate to AdminActivity for Users Management
+                val intent = Intent(this, AdminActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_exams -> {
+                // TODO: Navigate to Exams Management Activity
+            }
+            R.id.nav_results -> {
+                // TODO: Navigate to Results Activity
+            }
+            R.id.nav_settings -> {
+                // TODO: Navigate to Settings Activity
+            }
+            R.id.nav_logout -> {
+                // Log out and return to LoginActivity
+                auth.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }*/
+
 }
