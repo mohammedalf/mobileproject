@@ -35,34 +35,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-/*    private fun loginUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("LoginActivity", "signInWithEmail:success")
-                    val user = auth.currentUser
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
 
-                    // Redirect to another activity
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("LoginActivity", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }*/
 
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Login is successful, redirect to HomeActivity
-//                    val intent = Intent(this, HomeActivity::class.java)
-                    val intent = Intent(this, AdminActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()  // Close the login activity
                 } else {

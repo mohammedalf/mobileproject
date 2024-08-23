@@ -23,8 +23,10 @@
         </activity>
         <activity android:name=".HomeActivity"
             android:exported="true"/>
-
+        <activity android:name=".MainActivity" android:exported="true"/>
         <activity android:name=".AdminActivity" android:exported="true"/>
+
+
 
     </application>
 
