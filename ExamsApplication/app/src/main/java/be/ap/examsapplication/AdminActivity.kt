@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObjects
 
-data class User(val firstName: String = "", val lastName: String = "")
+//data class User(val firstName: String = "", val lastName: String = "")
 
 class AdminActivity : AppCompatActivity() {
 
@@ -37,7 +37,7 @@ class AdminActivity : AppCompatActivity() {
         usersRecyclerView = findViewById(R.id.usersRecyclerView)
 
         // Initialize RecyclerView
-        usersAdapter = UsersAdapter(mutableListOf())
+        usersAdapter = UsersAdapter(mutableListOf()) {} // Empty initial list and no click handling
         usersRecyclerView.adapter = usersAdapter
         usersRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -53,7 +53,7 @@ class AdminActivity : AppCompatActivity() {
                         Toast.makeText(this, "User added", Toast.LENGTH_SHORT).show()
                         firstNameEditText.text.clear()
                         lastNameEditText.text.clear()
-                        loadUsers()
+                        loadUsers() // Refresh the list after adding
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "Error adding user: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -90,7 +90,7 @@ class AdminActivity : AppCompatActivity() {
                 }
                 Toast.makeText(this, "Multiple users added", Toast.LENGTH_SHORT).show()
                 multipleUsersEditText.text.clear()
-                loadUsers()
+                loadUsers() // Refresh the list after adding
             } else {
                 Toast.makeText(this, "Please paste a list of users", Toast.LENGTH_SHORT).show()
             }
@@ -103,7 +103,7 @@ class AdminActivity : AppCompatActivity() {
     private fun loadUsers() {
         usersCollection.get()
             .addOnSuccessListener { result ->
-                val users = result.toObjects<User>()
+                val users = result.toObjects(User::class.java)
                 usersAdapter.setUsers(users)
             }
             .addOnFailureListener { e ->

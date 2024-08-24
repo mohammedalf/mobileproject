@@ -37,7 +37,11 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+
+
 }
+
 
 dependencies {
 
@@ -50,5 +54,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
+
 }
+
