@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".StartExamActivity">
 
-    <!-- Titel van het Examen -->
     <TextView
         android:id="@+id/examTitleTextView"
         android:layout_width="0dp"
@@ -19,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-    <!-- Vraagtekst -->
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="0dp"
@@ -32,7 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-    <!-- Layout voor meerkeuzeopties -->
     <RadioGroup
         android:id="@+id/multipleChoiceOptionsLayout"
         android:layout_width="0dp"
@@ -70,7 +66,6 @@
 
     </RadioGroup>
 
-    <!-- Antwoordveld voor open vragen -->
     <EditText
         android:id="@+id/openQuestionAnswerEditText"
         android:layout_width="0dp"
@@ -82,18 +77,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-    <!-- Knop om een antwoord in te dienen -->
     <Button
-        android:id="@+id/submitAnswerButton"
+        android:id="@+id/previousQuestionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Answer"
+        android:text="Previous"
         app:layout_constraintTop_toBottomOf="@id/multipleChoiceOptionsLayout"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/nextQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintTop_toBottomOf="@id/multipleChoiceOptionsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-    <!-- Knop om het examen te voltooien -->
     <Button
         android:id="@+id/finishExamButton"
         android:layout_width="wrap_content"
@@ -103,4 +104,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/endAndSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End and Save Exam"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
