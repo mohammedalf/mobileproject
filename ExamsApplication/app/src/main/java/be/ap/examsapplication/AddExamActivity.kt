@@ -79,7 +79,7 @@ class AddExamActivity : AppCompatActivity() {
             }
     }
 
-    private fun showOpenQuestionDialog() {
+/*    private fun showOpenQuestionDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_open_question, null)
         val questionEditText = dialogView.findViewById<EditText>(R.id.openQuestionEditText)
 
@@ -97,7 +97,31 @@ class AddExamActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }*/
+
+    private fun showOpenQuestionDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_open_question, null)
+        val questionEditText = dialogView.findViewById<EditText>(R.id.openQuestionEditText)
+        val answerEditText = dialogView.findViewById<EditText>(R.id.openAnswerEditText) // Voeg dit toe aan je XML
+
+        AlertDialog.Builder(this)
+            .setTitle("Add Open Question")
+            .setView(dialogView)
+            .setPositiveButton("Add") { _, _ ->
+                val questionText = questionEditText.text.toString().trim()
+                val answerText = answerEditText.text.toString().trim() // Haal het antwoord op
+
+                if (questionText.isNotEmpty() && answerText.isNotEmpty()) { // Zorg ervoor dat beide velden niet leeg zijn
+                    questions.add(Question.OpenQuestion(questionText, answerText))
+                    questionsAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(this, "Question and answer cannot be empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
+
 
     private fun showMultipleChoiceQuestionDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_multiple_choice_question, null)
