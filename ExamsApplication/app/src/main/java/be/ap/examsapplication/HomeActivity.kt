@@ -8,6 +8,44 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 class HomeActivity : AppCompatActivity() {
+    private lateinit var examsRecyclerView: RecyclerView
+    private lateinit var examsAdapter: ExamsAdapter
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private val examsCollection = firestore.collection("exams")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+
+        examsRecyclerView = findViewById(R.id.examsRecyclerView)
+
+        examsAdapter = ExamsAdapter(emptyList()) { exam ->
+            // Navigate to UsersActivity with the selected exam ID
+            val intent = Intent(this, UsersActivity::class.java)
+            intent.putExtra("examId", exam.id)
+            startActivity(intent)
+        }
+
+        examsRecyclerView.adapter = examsAdapter
+        examsRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        loadExams()
+    }
+
+    private fun loadExams() {
+        examsCollection.get()
+            .addOnSuccessListener { result ->
+                val exams = result.toObjects(Exam::class.java)
+                examsAdapter.setExams(exams)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error loading exams: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+}
+
+/*class HomeActivity : AppCompatActivity() {
     private lateinit var usersRecyclerView: RecyclerView
     private lateinit var usersAdapter: UsersAdapter
 
@@ -58,7 +96,7 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error loading users: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
-}
+}*/
 
 /*
 
