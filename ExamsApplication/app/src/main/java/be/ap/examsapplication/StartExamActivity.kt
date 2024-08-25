@@ -131,7 +131,7 @@ class StartExamActivity : AppCompatActivity() {
                 }
             } ?: run {
                 Toast.makeText(this, "Failed to get location", Toast.LENGTH_SHORT).show()
-                finishExam(userName)  // Proceed without location
+                finishExam(userName)
             }
         }
     }
@@ -180,7 +180,7 @@ class StartExamActivity : AppCompatActivity() {
                             }
                         }
                         userAnswers.clear()
-                        userAnswers.addAll(List(questions.size) { "" }) // Initialize empty answers
+                        userAnswers.addAll(List(questions.size) { "" }) 
                         loadQuestion()
                     } else {
                         Toast.makeText(this, "Exam data is null", Toast.LENGTH_SHORT).show()
@@ -234,7 +234,6 @@ class StartExamActivity : AppCompatActivity() {
         finishExamButton.visibility = View.GONE
         endAndSaveButton.visibility = if (currentQuestionIndex == questions.size - 1) View.VISIBLE else View.GONE
     }
-
     private fun saveAnswer() {
         val question = questions[currentQuestionIndex]
         val userAnswer: String
@@ -242,6 +241,9 @@ class StartExamActivity : AppCompatActivity() {
         when (question) {
             is Question.OpenQuestion -> {
                 userAnswer = openQuestionAnswerEditText.text.toString()
+                if (userAnswer.equals(question.answer, ignoreCase = true)) {
+                    score++
+                }
             }
             is Question.MultipleChoiceQuestion -> {
                 userAnswer = when {
@@ -251,27 +253,33 @@ class StartExamActivity : AppCompatActivity() {
                     option4RadioButton.isChecked -> option4RadioButton.text.toString()
                     else -> ""
                 }
+                if (userAnswer == question.correctOption) {
+                    score++
+                }
             }
             else -> userAnswer = ""
         }
 
         userAnswers[currentQuestionIndex] = userAnswer
-        if (question is Question.MultipleChoiceQuestion && userAnswer == question.correctOption) {
-            score++
-        }
     }
+
+
     private fun finishExam(userName: String?) {
         Log.d("StartExamActivity", "Finishing exam for user: $userName")
 
         val endTime = System.currentTimeMillis()
         val examDuration = (endTime - startTime) / 1000
 
+        // Bereken de schaalfactor om de score op 20 te brengen
+        val maxScore = questions.size
+        val scaledScore = (score.toDouble() / maxScore) * 20
+
         val examResult = mapOf(
             "userName" to userName,
             "examTitle" to examTitleTextView.text.toString(),
             "date" to Date(),
             "duration" to examDuration,
-            "score" to score,
+            "score" to scaledScore,  // De geschaalde score wordt hier opgeslagen
             "answers" to userAnswers,
             "latitude" to latitude,
             "longitude" to longitude,
@@ -291,29 +299,7 @@ class StartExamActivity : AppCompatActivity() {
     }
 
 
-/*    private fun finishExam(userName: String?) {
-        val endTime = System.currentTimeMillis()
-        val examDuration = (endTime - startTime) / 1000
 
-        val examResult = mapOf(
-            "userName" to userName,
-            "examTitle" to examTitleTextView.text.toString(),
-            "date" to Date(),
-            "duration" to examDuration,
-            "score" to score,
-            "answers" to userAnswers,
-            "latitude" to latitude,
-            "longitude" to longitude,
-            "address" to address
-        )
 
-        firestore.collection("examResults").add(examResult)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Exam finished and results saved", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }*/
+
 }
