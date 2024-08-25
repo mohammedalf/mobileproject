@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".StartExamActivity">
 
+    <!-- Titel van het Examen -->
     <TextView
         android:id="@+id/examTitleTextView"
         android:layout_width="0dp"
@@ -18,6 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
+    <!-- Vraagtekst -->
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="0dp"
@@ -30,16 +32,68 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-    <Button
-        android:id="@+id/submitAnswerButton"
-        android:layout_width="wrap_content"
+    <!-- Layout voor meerkeuzeopties -->
+    <RadioGroup
+        android:id="@+id/multipleChoiceOptionsLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Submit Answer"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/questionTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
+
+        <RadioButton
+            android:id="@+id/option1RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 1" />
+
+        <RadioButton
+            android:id="@+id/option2RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 2" />
+
+        <RadioButton
+            android:id="@+id/option3RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 3" />
+
+        <RadioButton
+            android:id="@+id/option4RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 4" />
+
+    </RadioGroup>
+
+    <!-- Antwoordveld voor open vragen -->
+    <EditText
+        android:id="@+id/openQuestionAnswerEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Your answer"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/questionTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
+    <!-- Knop om een antwoord in te dienen -->
+    <Button
+        android:id="@+id/submitAnswerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Answer"
+        app:layout_constraintTop_toBottomOf="@id/multipleChoiceOptionsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+    <!-- Knop om het examen te voltooien -->
     <Button
         android:id="@+id/finishExamButton"
         android:layout_width="wrap_content"
