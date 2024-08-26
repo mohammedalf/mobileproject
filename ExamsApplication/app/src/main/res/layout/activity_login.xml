@@ -28,6 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login" />
+        <Button
+            android:id="@+id/skipButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make an exam"
+            android:layout_marginTop="16dp" />
+
 
 
     </LinearLayout>

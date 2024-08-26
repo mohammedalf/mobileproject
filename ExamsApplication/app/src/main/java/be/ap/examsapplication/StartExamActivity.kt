@@ -180,7 +180,7 @@ class StartExamActivity : AppCompatActivity() {
                             }
                         }
                         userAnswers.clear()
-                        userAnswers.addAll(List(questions.size) { "" }) 
+                        userAnswers.addAll(List(questions.size) { "" })
                         loadQuestion()
                     } else {
                         Toast.makeText(this, "Exam data is null", Toast.LENGTH_SHORT).show()
@@ -263,7 +263,33 @@ class StartExamActivity : AppCompatActivity() {
         userAnswers[currentQuestionIndex] = userAnswer
     }
 
+    private fun finishExam(userName: String?) {
+        val endTime = System.currentTimeMillis()
+        val examDuration = (endTime - startTime) / 1000
 
+        val examResult = ExamResult(
+            userName = userName ?: "",
+            examTitle = examTitleTextView.text.toString(),
+            date = Date(),
+            duration = examDuration,
+            score = (score.toDouble() / questions.size) * 20,  // De geschaalde score
+            answers = userAnswers,
+            latitude = latitude,
+            longitude = longitude,
+            address = address
+        )
+
+        firestore.collection("examResults").add(examResult)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Exam finished and results saved", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+/*
     private fun finishExam(userName: String?) {
         Log.d("StartExamActivity", "Finishing exam for user: $userName")
 
@@ -297,6 +323,7 @@ class StartExamActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+*/
 
 
 

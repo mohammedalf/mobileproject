@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val loginButton: Button = findViewById(R.id.loginButton)
+        val skipButton: Button = findViewById(R.id.skipButton)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -32,6 +33,13 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 loginUser(email, password)
             }
+        }
+
+        skipButton.setOnClickListener {
+            // Navigate directly to MainActivity without logging in
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
