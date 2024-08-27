@@ -289,41 +289,7 @@ class StartExamActivity : AppCompatActivity() {
             }
     }
 
-/*
-    private fun finishExam(userName: String?) {
-        Log.d("StartExamActivity", "Finishing exam for user: $userName")
 
-        val endTime = System.currentTimeMillis()
-        val examDuration = (endTime - startTime) / 1000
-
-        // Bereken de schaalfactor om de score op 20 te brengen
-        val maxScore = questions.size
-        val scaledScore = (score.toDouble() / maxScore) * 20
-
-        val examResult = mapOf(
-            "userName" to userName,
-            "examTitle" to examTitleTextView.text.toString(),
-            "date" to Date(),
-            "duration" to examDuration,
-            "score" to scaledScore,  // De geschaalde score wordt hier opgeslagen
-            "answers" to userAnswers,
-            "latitude" to latitude,
-            "longitude" to longitude,
-            "address" to address
-        )
-
-        firestore.collection("examResults").add(examResult)
-            .addOnSuccessListener {
-                Log.d("StartExamActivity", "Exam results successfully saved.")
-                Toast.makeText(this, "Exam finished and results saved", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener { e ->
-                Log.e("StartExamActivity", "Failed to save exam results: ${e.message}")
-                Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-*/
 
 
 

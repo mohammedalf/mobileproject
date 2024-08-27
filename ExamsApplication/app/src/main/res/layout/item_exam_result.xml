@@ -8,20 +8,19 @@
         android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
-        android:textStyle="bold" />
+        android:text="User Name" />
 
-<!--    <TextView
+    <TextView
         android:id="@+id/examTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exam Title" />-->
+        android:text="Exam Title" />
 
-<!--    <TextView
+    <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date" />-->
+        android:text="Date" />
 
     <TextView
         android:id="@+id/durationTextView"
@@ -41,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Address" />
 
-<!--    <TextView
+    <TextView
         android:id="@+id/latitudeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +50,7 @@
         android:id="@+id/longitudeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Longitude" />-->
+        android:text="Longitude" />
 
 </LinearLayout>
 
@@ -66,19 +65,20 @@
             android:id="@+id/userNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Name" />
+            android:text="User Name"
+            android:textStyle="bold" />
 
-        <TextView
+    &lt;!&ndash;    <TextView
             android:id="@+id/examTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exam Title" />
+            android:text="Exam Title" />&ndash;&gt;
 
-        <TextView
+    &lt;!&ndash;    <TextView
             android:id="@+id/dateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date" />
+            android:text="Date" />&ndash;&gt;
 
         <TextView
             android:id="@+id/durationTextView"
@@ -98,5 +98,18 @@
             android:layout_height="wrap_content"
             android:text="Address" />
 
+    &lt;!&ndash;    <TextView
+            android:id="@+id/latitudeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude" />
+
+        <TextView
+            android:id="@+id/longitudeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longitude" />&ndash;&gt;
+
     </LinearLayout>
     -->
+

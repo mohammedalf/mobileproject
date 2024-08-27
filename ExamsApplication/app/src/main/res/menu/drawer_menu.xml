@@ -12,10 +12,10 @@
         android:id="@+id/nav_results"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Results" />
-    <item
+<!--    <item
         android:id="@+id/nav_settings"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="Settings" />
+        android:title="Settings" />-->
     <item
         android:id="@+id/nav_logout"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
