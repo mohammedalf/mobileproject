@@ -50,7 +50,7 @@ class StartExamActivity : AppCompatActivity() {
     private var currentQuestionIndex: Int = 0
     private lateinit var questions: List<Question>
     private val userAnswers = mutableListOf<String>()
-    private var score: Int = 0
+    private var score: Double = 0.0
     private var latitude: Double? = null
     private var longitude: Double? = null
     private var address: String? = null
@@ -234,7 +234,7 @@ class StartExamActivity : AppCompatActivity() {
         finishExamButton.visibility = View.GONE
         endAndSaveButton.visibility = if (currentQuestionIndex == questions.size - 1) View.VISIBLE else View.GONE
     }
-    private fun saveAnswer() {
+/*    private fun saveAnswer() {
         val question = questions[currentQuestionIndex]
         val userAnswer: String
 
@@ -261,8 +261,38 @@ class StartExamActivity : AppCompatActivity() {
         }
 
         userAnswers[currentQuestionIndex] = userAnswer
+    }*/
+private fun saveAnswer() {
+    val question = questions[currentQuestionIndex]
+    val userAnswer: String
+
+    when (question) {
+        is Question.OpenQuestion -> {
+            userAnswer = openQuestionAnswerEditText.text.toString()
+            if (userAnswer.equals(question.answer, ignoreCase = true)) {
+                score += 20.0 / questions.size
+            }
+        }
+        is Question.MultipleChoiceQuestion -> {
+            userAnswer = when {
+                option1RadioButton.isChecked -> option1RadioButton.text.toString()
+                option2RadioButton.isChecked -> option2RadioButton.text.toString()
+                option3RadioButton.isChecked -> option3RadioButton.text.toString()
+                option4RadioButton.isChecked -> option4RadioButton.text.toString()
+                else -> ""
+            }
+            if (userAnswer == question.correctOption) {
+                score += 20.0 / questions.size
+            }
+        }
+        else -> userAnswer = ""
     }
 
+    userAnswers[currentQuestionIndex] = userAnswer
+}
+
+
+/*
     private fun finishExam(userName: String?) {
         val endTime = System.currentTimeMillis()
         val examDuration = (endTime - startTime) / 1000
@@ -288,6 +318,32 @@ class StartExamActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+*/
+private fun finishExam(userName: String?) {
+    val endTime = System.currentTimeMillis()
+    val examDuration = (endTime - startTime) / 1000
+
+    val examResult = ExamResult(
+        userName = userName ?: "",
+        examTitle = examTitleTextView.text.toString(),
+        date = Date(),
+        duration = examDuration,
+        score = score,
+        answers = userAnswers,
+        latitude = latitude,
+        longitude = longitude,
+        address = address
+    )
+
+    firestore.collection("examResults").add(examResult)
+        .addOnSuccessListener {
+            Toast.makeText(this, "Exam finished and results saved", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        .addOnFailureListener { e ->
+            Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+}
 
 
 
