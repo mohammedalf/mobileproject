@@ -114,8 +114,6 @@ class StartExamActivity : AppCompatActivity() {
     private fun requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
-        } else {
-            // Permission is already granted
         }
     }
 
@@ -234,34 +232,7 @@ class StartExamActivity : AppCompatActivity() {
         finishExamButton.visibility = View.GONE
         endAndSaveButton.visibility = if (currentQuestionIndex == questions.size - 1) View.VISIBLE else View.GONE
     }
-/*    private fun saveAnswer() {
-        val question = questions[currentQuestionIndex]
-        val userAnswer: String
 
-        when (question) {
-            is Question.OpenQuestion -> {
-                userAnswer = openQuestionAnswerEditText.text.toString()
-                if (userAnswer.equals(question.answer, ignoreCase = true)) {
-                    score++
-                }
-            }
-            is Question.MultipleChoiceQuestion -> {
-                userAnswer = when {
-                    option1RadioButton.isChecked -> option1RadioButton.text.toString()
-                    option2RadioButton.isChecked -> option2RadioButton.text.toString()
-                    option3RadioButton.isChecked -> option3RadioButton.text.toString()
-                    option4RadioButton.isChecked -> option4RadioButton.text.toString()
-                    else -> ""
-                }
-                if (userAnswer == question.correctOption) {
-                    score++
-                }
-            }
-            else -> userAnswer = ""
-        }
-
-        userAnswers[currentQuestionIndex] = userAnswer
-    }*/
 private fun saveAnswer() {
     val question = questions[currentQuestionIndex]
     val userAnswer: String
@@ -292,33 +263,7 @@ private fun saveAnswer() {
 }
 
 
-/*
-    private fun finishExam(userName: String?) {
-        val endTime = System.currentTimeMillis()
-        val examDuration = (endTime - startTime) / 1000
 
-        val examResult = ExamResult(
-            userName = userName ?: "",
-            examTitle = examTitleTextView.text.toString(),
-            date = Date(),
-            duration = examDuration,
-            score = (score.toDouble() / questions.size) * 20,  // De geschaalde score
-            answers = userAnswers,
-            latitude = latitude,
-            longitude = longitude,
-            address = address
-        )
-
-        firestore.collection("examResults").add(examResult)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Exam finished and results saved", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to save results: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-*/
 private fun finishExam(userName: String?) {
     val endTime = System.currentTimeMillis()
     val examDuration = (endTime - startTime) / 1000

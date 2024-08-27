@@ -81,9 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.putExtra("queryValue", "Jan Jansen")  // Vervang door de juiste waarde
                 startActivity(intent)
             }
-/*            R.id.nav_settings -> {
-                // TODO: Navigate to Settings Activity
-            }*/
+
             R.id.nav_logout -> {
                 auth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)

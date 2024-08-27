@@ -55,13 +55,5 @@ class UserResultsActivity : AppCompatActivity(), OnMapReadyCallback {
         val userName = intent.getStringExtra("userName")
         loadResultsByUser(userName)
     }
-/*override fun onMapReady(googleMap: GoogleMap) {
-    map = googleMap
-
-    // Hardcoded locatie instellen
-    val hardcodedLocation = LatLng(37.4221, -122.0841)  // Voorbeeld: Google HQ in Mountain View, CA
-    map.addMarker(MarkerOptions().position(hardcodedLocation).title("Hardcoded Location"))
-    map.moveCamera(CameraUpdateFactory.newLatLngZoom(hardcodedLocation, 15f))
-}*/
 
 }

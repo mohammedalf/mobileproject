@@ -19,13 +19,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // Set the title of the activity
         supportActionBar?.title = "Available Exams"
 
         examsRecyclerView = findViewById(R.id.examsRecyclerView)
 
         examsAdapter = ExamsAdapter(emptyList()) { exam ->
-            // Navigate to UsersActivity with the selected exam ID
             val intent = Intent(this, UsersActivity::class.java)
             intent.putExtra("examId", exam.id)
             startActivity(intent)
@@ -54,45 +52,4 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 }
-
-/*
-class HomeActivity : AppCompatActivity() {
-    private lateinit var examsRecyclerView: RecyclerView
-    private lateinit var examsAdapter: ExamsAdapter
-
-    private val firestore = FirebaseFirestore.getInstance()
-    private val examsCollection = firestore.collection("exams")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-
-        examsRecyclerView = findViewById(R.id.examsRecyclerView)
-
-        examsAdapter = ExamsAdapter(emptyList()) { exam ->
-            // Navigate to UsersActivity with the selected exam ID
-            val intent = Intent(this, UsersActivity::class.java)
-            intent.putExtra("examId", exam.id)
-            startActivity(intent)
-        }
-
-        examsRecyclerView.adapter = examsAdapter
-        examsRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        loadExams()
-    }
-
-    private fun loadExams() {
-        examsCollection.get()
-            .addOnSuccessListener { result ->
-                val exams = result.toObjects(Exam::class.java)
-                examsAdapter.setExams(exams)
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error loading exams: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-}
-*/
-
 

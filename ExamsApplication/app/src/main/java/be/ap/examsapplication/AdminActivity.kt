@@ -87,7 +87,7 @@ class AdminActivity : AppCompatActivity() {
                     val userWithId = user.copy(id = newUserRef.id)
                     newUserRef.set(userWithId)
                         .addOnSuccessListener {
-                            // Optional: Show success message or update UI
+
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(this, "Error adding user: ${e.message}", Toast.LENGTH_SHORT).show()

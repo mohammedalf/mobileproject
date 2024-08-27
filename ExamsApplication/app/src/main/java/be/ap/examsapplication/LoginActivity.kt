@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     // Login is successful, redirect to HomeActivity
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()  // Close the login activity
+                    finish()
                 } else {
                     // If login fails, show an error message
                     Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
